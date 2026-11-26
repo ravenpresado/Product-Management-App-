@@ -59,7 +59,7 @@ const products = [
     category: 'Sandals',
     price: 550,
     quantity: 14,
-    image: 'https://images.unsplash.com/photo- sandal',
+    image: 'https://images.unsplash.com/photo-1603487742131-4160ec999306',
     description: 'Lightweight sandals for daily use.',
   },
   {
@@ -77,7 +77,7 @@ const products = [
     category: "Women's Accessories",
     price: 1200,
     quantity: 5,
-    image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f',
+        image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3',
     description: 'Stylish shoulder bag for everyday essentials.',
   },
 ]

@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
   const categories = [
     'All',
@@ -62,10 +63,50 @@ function ProductList() {
                 Subtotal: ₱
                 {(product.price * product.quantity).toLocaleString('en-PH')}
               </p>
+              <button
+                className="view-details-btn"
+                onClick={() => setSelectedProduct(product)}
+                >
+                View Details
+                </button>
             </div>
           </div>
         ))}
-      </div>
+            </div>
+
+      {selectedProduct && (
+        <div className="modal-overlay">
+          <div className="product-modal">
+            <button
+              className="close-modal-btn"
+              onClick={() => setSelectedProduct(null)}
+            >
+              ×
+            </button>
+
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+            />
+
+            <div className="modal-product-info">
+              <span className="product-category">
+                {selectedProduct.category}
+              </span>
+
+              <h2>{selectedProduct.name}</h2>
+
+              <p>{selectedProduct.description}</p>
+
+              <h3>
+                ₱{selectedProduct.price.toLocaleString('en-PH')}
+              </h3>
+
+              <p>Available Stock: {selectedProduct.quantity}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
