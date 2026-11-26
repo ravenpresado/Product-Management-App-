@@ -42,39 +42,42 @@ function Dashboard() {
 
   return (
     <div className="dashboard-layout">
-      <aside className="sidebar">
-        <h2 className="sidebar-logo">ProductHub</h2>
+      <header className="top-header">
+  <h2 className="sidebar-logo">ProductHub</h2>
 
-        <nav className="sidebar-nav">
-          <button
-            className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActivePage('dashboard')}
-          >
-            Dashboard
-          </button>
+  <nav className="sidebar-nav">
+    <button
+      className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
+      onClick={() => setActivePage('dashboard')}
+    >
+      Dashboard
+    </button>
 
-          <button
-            className={`nav-item ${activePage === 'products' ? 'active' : ''}`}
-            onClick={() => setActivePage('products')}
-          >
-            Products
-          </button>
+    <button
+      className={`nav-item ${activePage === 'products' ? 'active' : ''}`}
+      onClick={() => {
+        setSelectedCategory('All')
+        setActivePage('products')
+      }}
+    >
+      Products
+    </button>
 
-          <button
-            className={`nav-item ${activePage === 'categories' ? 'active' : ''}`}
-            onClick={() => setActivePage('categories')}
-          >
-            Categories
-          </button>
+    <button
+      className={`nav-item ${activePage === 'categories' ? 'active' : ''}`}
+      onClick={() => setActivePage('categories')}
+    >
+      Categories
+    </button>
 
-          <button
-            className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
-            onClick={() => setActivePage('cart')}
-          >
-            Cart ({cartItemCount})
-          </button>
-        </nav>
-      </aside>
+    <button
+      className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
+      onClick={() => setActivePage('cart')}
+    >
+      Cart ({cartItemCount})
+    </button>
+  </nav>
+</header>
 
       <main className="main-content">
         {activePage === 'dashboard' && (
