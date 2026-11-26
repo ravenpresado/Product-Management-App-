@@ -194,3 +194,21 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Products Page */
+.products-page {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  min-height: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.products-page h1 {
+  color: #172554;
+  margin-top: 0;
+}
+
+.products-page p {
+  color: #64748b;
+}
