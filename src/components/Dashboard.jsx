@@ -1,79 +1,152 @@
+
 import { useState } from 'react'
 import Products from '../pages/Products'
+import ProductList from './ProductList'
 
 function Dashboard() {
-      const [activePage, setActivePage] = useState('dashboard')
+  const [activePage, setActivePage] = useState('dashboard')
+  const [cart, setCart] = useState([])
+
+  const addToCart = (product) => {
+    setCart((currentCart) => {
+      const existingProduct = currentCart.find(
+        (item) => item.id === product.id
+      )
+
+      if (existingProduct) {
+        if (existingProduct.cartQuantity >= product.quantity) {
+          alert('Maximum available stock reached!')
+          return currentCart
+        }
+
+        return currentCart.map((item) =>
+          item.id === product.id
+            ? { ...item, cartQuantity: item.cartQuantity + 1 }
+            : item
+        )
+      }
+
+      return [...currentCart, { ...product, cartQuantity: 1 }]
+    })
+  }
+
+  const cartItemCount = cart.reduce(
+    (total, item) => total + item.cartQuantity,
+    0
+  )
+
+  const cartTotal = cart.reduce(
+    (total, item) => total + item.price * item.cartQuantity,
+    0
+  )
+
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
       <aside className="sidebar">
         <h2 className="sidebar-logo">ProductHub</h2>
 
         <nav className="sidebar-nav">
-        <button
+          <button
             className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
             onClick={() => setActivePage('dashboard')}
-        >
+          >
             Dashboard
-        </button>
+          </button>
 
-        <button
+          <button
             className={`nav-item ${activePage === 'products' ? 'active' : ''}`}
             onClick={() => setActivePage('products')}
-        >
+          >
             Products
-        </button>
+          </button>
 
-        <button className="nav-item">Categories</button>
-        <button className="nav-item">Cart</button>
+          <button className="nav-item">Categories</button>
+
+          <button
+            className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
+            onClick={() => setActivePage('cart')}
+          >
+            Cart ({cartItemCount})
+          </button>
         </nav>
       </aside>
 
-      {/* Main Content */}
       <main className="main-content">
-  {activePage === 'dashboard' && (
-    <>
-      <header className="dashboard-header">
-        <div>
-          <h1>Dashboard</h1>
-          <p>Welcome to your Product Management System</p>
-        </div>
-      </header>
+        {activePage === 'dashboard' && (
+          <>
+            <header className="dashboard-header">
+              <div>
+                <h1>Dashboard</h1>
+                <p>Welcome to your Product Management System</p>
+              </div>
+            </header>
 
-      <section className="dashboard-content">
-        <h2>Overview</h2>
+            <section className="dashboard-content">
+              <h2>Overview</h2>
 
-        <div className="summary-cards">
-          <div className="summary-card blue">
-            <h3>Total Products</h3>
-            <p className="summary-number">12</p>
-            <span>Products in inventory</span>
-          </div>
+              <div className="summary-cards">
+                <div className="summary-card blue">
+                  <h3>Total Products</h3>
+                  <p className="summary-number">12</p>
+                  <span>Products in inventory</span>
+                </div>
 
-          <div className="summary-card purple">
-            <h3>Categories</h3>
-            <p className="summary-number">4</p>
-            <span>Product categories</span>
-          </div>
+                <div className="summary-card purple">
+                  <h3>Categories</h3>
+                  <p className="summary-number">4</p>
+                  <span>Product categories</span>
+                </div>
 
-          <div className="summary-card green">
-            <h3>Cart Items</h3>
-            <p className="summary-number">0</p>
-            <span>Items currently in cart</span>
-          </div>
+                <div className="summary-card green">
+                  <h3>Cart Items</h3>
+                  <p className="summary-number">{cartItemCount}</p>
+                  <span>Items currently in cart</span>
+                </div>
 
-          <div className="summary-card orange">
-            <h3>Inventory Value</h3>
-            <p className="summary-number">₱25,450</p>
-            <span>Total inventory worth</span>
-          </div>
-        </div>
-      </section>
-    </>
-  )}
+                <div className="summary-card orange">
+                  <h3>Inventory Value</h3>
+                  <p className="summary-number">₱25,450</p>
+                  <span>Total inventory worth</span>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
 
-  {activePage === 'products' && <Products />}
-</main>
+        {activePage === 'products' && (
+          <Products cart={cart} addToCart={addToCart} />
+        )}
+
+        {activePage === 'cart' && (
+          <section className="cart-section">
+            <h1>Shopping Cart</h1>
+
+            {cart.length === 0 ? (
+              <p>Your cart is empty.</p>
+            ) : (
+              <>
+                {cart.map((item) => (
+                  <div className="cart-item" key={item.id}>
+                    <div>
+                      <h3>{item.name}</h3>
+                      <p>₱{item.price.toLocaleString('en-PH')} each</p>
+                      <p>Quantity: {item.cartQuantity}</p>
+                    </div>
+
+                    <strong>
+                      ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
+                    </strong>
+                  </div>
+                ))}
+
+                <h2 className="cart-total">
+                  Total: ₱{cartTotal.toLocaleString('en-PH')}
+                </h2>
+              </>
+            )}
+          </section>
+        )}
+      </main>
     </div>
   )
 }

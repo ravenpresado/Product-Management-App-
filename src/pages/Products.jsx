@@ -1,6 +1,7 @@
+
 import ProductList from '../components/ProductList'
 
-function Products() {
+function Products({ cart, addToCart }) {
   return (
     <div className="products-page">
       <div className="products-header">
@@ -8,10 +9,12 @@ function Products() {
           <h1>Products</h1>
           <p>Browse and manage your fashion collection.</p>
         </div>
-        <span className="product-count">{/* Product count will be added later */}</span>
+        <span className="product-count">
+          {cart.reduce((total, item) => total + item.cartQuantity, 0)} items in cart
+        </span>
       </div>
 
-      <ProductList />
+      <ProductList cart={cart} addToCart={addToCart} />
     </div>
   )
 }
