@@ -23,9 +23,34 @@ function Dashboard() {
         </header>
 
         <section className="dashboard-content">
-          <h2>Overview</h2>
-          <p>Your product dashboard will appear here.</p>
-        </section>
+  <h2>Overview</h2>
+
+  <div className="summary-cards">
+    <div className="summary-card blue">
+      <h3>Total Products</h3>
+      <p className="summary-number">12</p>
+      <span>Products in inventory</span>
+    </div>
+
+    <div className="summary-card purple">
+      <h3>Categories</h3>
+      <p className="summary-number">4</p>
+      <span>Product categories</span>
+    </div>
+
+    <div className="summary-card green">
+      <h3>Cart Items</h3>
+      <p className="summary-number">0</p>
+      <span>Items currently in cart</span>
+    </div>
+
+    <div className="summary-card orange">
+      <h3>Inventory Value</h3>
+      <p className="summary-number">₱25,450</p>
+      <span>Total inventory worth</span>
+    </div>
+  </div>
+</section>
       </main>
     </div>
   )
