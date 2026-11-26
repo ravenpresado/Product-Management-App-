@@ -1412,8 +1412,9 @@
 /* ADD TO CART SUCCESS NOTIFICATION */
 .cart-notification {
   position: fixed;
-  top: 90px;
-  right: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 9999;
   display: flex;
   align-items: center;
