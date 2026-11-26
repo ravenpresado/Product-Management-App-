@@ -419,3 +419,21 @@
     max-height: 250px;
   }
 }
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #172554;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #2563eb;
+}
