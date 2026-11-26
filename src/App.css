@@ -782,3 +782,194 @@
     grid-column: auto;
   }
 }
+
+
+/* NEW ADD PRODUCT FORM DESIGN */
+.add-product-page {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 14px;
+  color: #172554;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+}
+
+.add-product-heading {
+  margin-bottom: 30px;
+}
+
+.add-product-heading h1 {
+  color: #172554;
+  font-size: 30px;
+  margin: 0 0 10px;
+}
+
+.add-product-heading p {
+  color: #64748b;
+  font-size: 15px;
+  margin: 0;
+}
+
+.add-product-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  height: 46px;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-actions button {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-actions .add-to-cart-btn {
+  flex: 1;
+  background: #172554;
+  color: #ffffff;
+}
+
+.form-actions .add-to-cart-btn:hover {
+  background: #2563eb;
+}
+
+.form-actions .back-to-products-btn {
+  background: #e2e8f0;
+  color: #172554;
+}
+
+.form-actions .back-to-products-btn:hover {
+  background: #cbd5e1;
+}
+
+@media (max-width: 700px) {
+  .add-product-page {
+    padding: 22px;
+  }
+
+  .add-product-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    grid-column: auto;
+    flex-direction: column;
+  }
+}
+
+
+/* TOP HORIZONTAL NAVIGATION */
+.top-header {
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.sidebar-logo {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.sidebar-nav .nav-item {
+  width: auto;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.sidebar-nav .nav-item:hover,
+.sidebar-nav .nav-item.active {
+  background: #3b82f6;
+  color: white;
+}
+
+@media (max-width: 650px) {
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar-nav {
+    justify-content: flex-start;
+  }
+}
+

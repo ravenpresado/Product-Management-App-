@@ -11,10 +11,10 @@ function Dashboard() {
   const [productList, setProductList] = useState(productsData)
 
   const handleAddProduct = (newProduct) => {
-  setProductList((currentProducts) => [...currentProducts, newProduct])
-  setActivePage('products')
-  setSelectedCategory('All')
-}
+    setProductList((currentProducts) => [...currentProducts, newProduct])
+    setActivePage('products')
+    setSelectedCategory('All')
+  }
 
   const addToCart = (product) => {
     setCart((currentCart) => {
@@ -52,57 +52,48 @@ function Dashboard() {
   return (
     <div className="dashboard-layout">
       <header className="top-header">
-  <h2 className="sidebar-logo">ProductHub</h2>
+        <h2 className="sidebar-logo">ProductHub</h2>
 
-  <nav className="sidebar-nav">
-    <button
-      className={activePage === 'addProduct' ? 'active' : ''}
-      onClick={() => setActivePage('addProduct')}
-    >
-      + Add Product
-    </button>
+        <nav className="sidebar-nav">
+          <button
+            className={`nav-item ${activePage === 'addProduct' ? 'active' : ''}`}
+            onClick={() => setActivePage('addProduct')}
+          >
+            + Add Product
+          </button>
 
-    <button
-      className={`nav-item ${activePage === 'products' ? 'active' : ''}`}
-      onClick={() => {
-        setSelectedCategory('All')
-        setActivePage('products')
-      }}
-    >
-      Products
-    </button>
+          <button
+            className={`nav-item ${activePage === 'products' ? 'active' : ''}`}
+            onClick={() => {
+              setSelectedCategory('All')
+              setActivePage('products')
+            }}
+          >
+            Products
+          </button>
 
-    <button
-      className={`nav-item ${activePage === 'categories' ? 'active' : ''}`}
-      onClick={() => setActivePage('categories')}
-    >
-      Categories
-    </button>
+          <button
+            className={`nav-item ${activePage === 'categories' ? 'active' : ''}`}
+            onClick={() => setActivePage('categories')}
+          >
+            Categories
+          </button>
 
-    <button
-      className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
-      onClick={() => setActivePage('cart')}
-    >
-      {activePage === 'addProduct' && (
-  <AddProduct
-    onAddProduct={handleAddProduct}
-    onCancel={() => setActivePage('products')}
-  />
-)}
-
-      Cart ({cartItemCount})
-    </button>
-  </nav>
-</header>
+          <button
+            className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
+            onClick={() => setActivePage('cart')}
+          >
+            Cart ({cartItemCount})
+          </button>
+        </nav>
+      </header>
 
       <main className="main-content">
         {activePage === 'dashboard' && (
           <>
             <header className="dashboard-header">
-              <div>
-                <h1>Dashboard</h1>
-                <p>Welcome to your Product Management System</p>
-              </div>
+              <h1>Dashboard</h1>
+              <p>Welcome to your Product Management System</p>
             </header>
 
             <section className="dashboard-content">
@@ -137,6 +128,13 @@ function Dashboard() {
           </>
         )}
 
+        {activePage === 'addProduct' && (
+          <AddProduct
+            onAddProduct={handleAddProduct}
+            onCancel={() => setActivePage('products')}
+          />
+        )}
+
         {activePage === 'products' && (
           <Products
             products={productList}
@@ -149,32 +147,32 @@ function Dashboard() {
 
         {activePage === 'categories' && (
           <section className="dashboard-content">
-  <h1>Categories</h1>
-  <p>Browse your products by category.</p>
+            <h1>Categories</h1>
+            <p>Browse your products by category.</p>
 
-  <div className="categories-grid">
-    {[
-      "Women's Clothing",
-      "Men's Clothing",
-      "Shoes",
-      "Sandals",
-      "Men's Accessories",
-      "Women's Accessories"
-    ].map((category) => (
-      <button
-        key={category}
-        className="category-card"
-        onClick={() => {
-          setSelectedCategory(category)
-          setActivePage('products')
-        }}
-      >
-        <h3>{category}</h3>
-        <span>View Products →</span>
-      </button>
-    ))}
-  </div>
-</section>
+            <div className="categories-grid">
+              {[
+                "Women's Clothing",
+                "Men's Clothing",
+                'Shoes',
+                'Sandals',
+                "Men's Accessories",
+                "Women's Accessories"
+              ].map((category) => (
+                <button
+                  key={category}
+                  className="category-card"
+                  onClick={() => {
+                    setSelectedCategory(category)
+                    setActivePage('products')
+                  }}
+                >
+                  <h3>{category}</h3>
+                  <span>View Products →</span>
+                </button>
+              ))}
+            </div>
+          </section>
         )}
 
         {activePage === 'cart' && (
