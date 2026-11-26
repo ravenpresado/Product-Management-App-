@@ -58,12 +58,23 @@ useEffect(() => {
     0
   )
 
+  const inventoryTotal = productList.reduce(
+  (total, product) => total + product.price * product.quantity,
+  0
+)
+
   return (
     <div className="dashboard-layout">
       <header className="top-header">
         <h2 className="sidebar-logo">ProductHub</h2>
 
         <nav className="sidebar-nav">
+          <button
+  className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
+  onClick={() => setActivePage('dashboard')}
+>
+  Dashboard
+</button>
           <button
             className={`nav-item ${activePage === 'addProduct' ? 'active' : ''}`}
             onClick={() => setActivePage('addProduct')}
@@ -129,7 +140,9 @@ useEffect(() => {
 
                 <div className="summary-card orange">
                   <h3>Inventory Value</h3>
-                  <p className="summary-number">₱25,450</p>
+                  <p className="summary-number">
+                    ₱{inventoryTotal.toLocaleString('en-PH')}
+                  </p>
                   <span>Total inventory worth</span>
                 </div>
               </div>
