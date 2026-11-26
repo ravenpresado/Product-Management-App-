@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ProductDetails from '../pages/ProductDetails'
 
 function ProductList({
@@ -10,6 +10,22 @@ function ProductList({
   setSelectedCategory,
 }) {
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [notification, setNotification] = useState('')
+
+  useEffect(() => {
+    if (!notification) return
+
+    const timer = setTimeout(() => {
+      setNotification('')
+    }, 2500)
+
+    return () => clearTimeout(timer)
+  }, [notification])
+
+  const handleAddToCart = (product) => {
+    addToCart(product)
+    setNotification(`${product.name} added to cart!`)
+  }
 
   const categories = [
     'All',
@@ -30,10 +46,20 @@ function ProductList({
 
   return (
     <>
+      {notification && (
+        <div className="cart-notification">
+          <span className="notification-check">✓</span>
+          <div>
+            <strong>Added to Cart!</strong>
+            <p>{notification}</p>
+          </div>
+        </div>
+      )}
+
       {selectedProduct ? (
         <ProductDetails
           product={selectedProduct}
-          addToCart={addToCart}
+          addToCart={handleAddToCart}
           onBack={() => setSelectedProduct(null)}
         />
       ) : (
@@ -92,7 +118,7 @@ function ProductList({
 
                   <button
                     className="add-to-cart-btn"
-                    onClick={() => addToCart(product)}
+                    onClick={() => handleAddToCart(product)}
                     disabled={product.quantity <= 0}
                   >
                     Add to Cart
