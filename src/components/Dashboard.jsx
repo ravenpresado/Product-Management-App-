@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Products from '../pages/Products'
 import productsData from '../data/products'
 import AddProduct from '../pages/AddProduct'
@@ -8,13 +8,22 @@ function Dashboard() {
   const [activePage, setActivePage] = useState('dashboard')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [cart, setCart] = useState([])
-  const [productList, setProductList] = useState(productsData)
+  const [productList, setProductList] = useState(() => {
+  const savedProducts = localStorage.getItem('products')
+
+  return savedProducts ? JSON.parse(savedProducts) : productsData
+})
+useEffect(() => {
+  localStorage.setItem('products', JSON.stringify(productList))
+}, [productList])
 
   const handleAddProduct = (newProduct) => {
     setProductList((currentProducts) => [...currentProducts, newProduct])
     setActivePage('products')
     setSelectedCategory('All')
   }
+
+  
 
   const addToCart = (product) => {
     setCart((currentCart) => {

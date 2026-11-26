@@ -22,19 +22,46 @@ function AddProduct({ onAddProduct, onCancel }) {
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  
+const handleSubmit = (e) => {
+  e.preventDefault()
 
-    const newProduct = {
-      ...formData,
-      id: Date.now(),
-      rating: Number(formData.rating),
-      price: Number(formData.price),
-      quantity: Number(formData.quantity),
-    }
-
-    onAddProduct(newProduct)
+  if (
+    !formData.image.trim() ||
+    !formData.name.trim() ||
+    !formData.category ||
+    !formData.description.trim() ||
+    !formData.specification.trim() ||
+    formData.rating === '' ||
+    formData.price === '' ||
+    formData.quantity === ''
+  ) {
+    alert('Please fill in all fields.')
+    return
   }
+
+  if (
+    Number(formData.rating) < 1 ||
+    Number(formData.rating) > 5 ||
+    Number(formData.price) <= 0 ||
+    Number(formData.quantity) < 0 ||
+    !Number.isInteger(Number(formData.quantity))
+  ) {
+    alert('Please enter valid rating, price, and quantity values.')
+    return
+  }
+
+  const newProduct = {
+    ...formData,
+    id: Date.now(),
+    rating: Number(formData.rating),
+    price: Number(formData.price),
+    quantity: Number(formData.quantity),
+  }
+
+  onAddProduct(newProduct)
+}
+
 
   return (
     <div className="add-product-page">

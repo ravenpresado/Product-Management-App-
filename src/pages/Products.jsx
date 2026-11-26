@@ -1,3 +1,4 @@
+
 import ProductList from '../components/ProductList'
 
 function Products({
@@ -6,6 +7,7 @@ function Products({
   addToCart,
   selectedCategory,
   setSelectedCategory,
+  onDeleteProduct,
 }) {
   return (
     <div className="products-page">
@@ -26,6 +28,7 @@ function Products({
         addToCart={addToCart}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        onDeleteProduct={onDeleteProduct}
       />
     </div>
   )

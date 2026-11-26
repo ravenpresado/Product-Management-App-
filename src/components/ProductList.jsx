@@ -2,7 +2,13 @@
 import { useState } from 'react'
 import ProductDetails from '../pages/ProductDetails'
 
-function ProductList({ products, cart, addToCart, selectedCategory, setSelectedCategory }) {
+function ProductList({
+  products,
+  cart,
+  addToCart,
+  selectedCategory,
+  setSelectedCategory,
+}) {
   const [selectedProduct, setSelectedProduct] = useState(null)
 
   const categories = [
