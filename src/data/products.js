@@ -41,7 +41,7 @@ const products = [
     category: "Men's Clothing",
     price: 650,
     quantity: 9,
-    image: 'https://images.unsplash.com/photo-1625910513413-5fc9f5c7c9c6',
+    image: 'https://images.unsplash.com/photo-1627225924765-552d49cf47ad',
     description: 'Classic polo shirt suitable for casual occasions.',
   },
   {
