@@ -9,21 +9,19 @@ function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [cart, setCart] = useState([])
   const [productList, setProductList] = useState(() => {
-  const savedProducts = localStorage.getItem('products')
+    const savedProducts = localStorage.getItem('products')
+    return savedProducts ? JSON.parse(savedProducts) : productsData
+  })
 
-  return savedProducts ? JSON.parse(savedProducts) : productsData
-})
-useEffect(() => {
-  localStorage.setItem('products', JSON.stringify(productList))
-}, [productList])
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(productList))
+  }, [productList])
 
   const handleAddProduct = (newProduct) => {
     setProductList((currentProducts) => [...currentProducts, newProduct])
     setActivePage('products')
     setSelectedCategory('All')
   }
-
-  
 
   const addToCart = (product) => {
     setCart((currentCart) => {
@@ -59,9 +57,9 @@ useEffect(() => {
   )
 
   const inventoryTotal = productList.reduce(
-  (total, product) => total + product.price * product.quantity,
-  0
-)
+    (total, product) => total + product.price * product.quantity,
+    0
+  )
 
   return (
     <div className="dashboard-layout">
@@ -70,11 +68,12 @@ useEffect(() => {
 
         <nav className="sidebar-nav">
           <button
-  className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
-  onClick={() => setActivePage('dashboard')}
->
-  Dashboard
-</button>
+            className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
+            onClick={() => setActivePage('dashboard')}
+          >
+            Dashboard
+          </button>
+
           <button
             className={`nav-item ${activePage === 'addProduct' ? 'active' : ''}`}
             onClick={() => setActivePage('addProduct')}
@@ -179,7 +178,7 @@ useEffect(() => {
                 'Shoes',
                 'Sandals',
                 "Men's Accessories",
-                "Women's Accessories"
+                "Women's Accessories",
               ].map((category) => (
                 <button
                   key={category}
@@ -202,58 +201,64 @@ useEffect(() => {
             <h1>Shopping Cart</h1>
 
             {cart.length === 0 ? (
-              <p>Your cart is empty.</p>
+              <p className="empty-cart">Your cart is empty.</p>
             ) : (
               <>
-                {cart.map((item) => (
-                  <div className="cart-item" key={item.id}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="cart-item-image"
-                    />
+                <div className="cart-items-list">
+                  {cart.map((item) => (
+                    <div className="cart-item" key={item.id}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="cart-item-image"
+                      />
 
-                    <div className="cart-item-details">
-                      <h3>{item.name}</h3>
-                      <p>{item.category}</p>
-                      <p>₱{item.price.toLocaleString('en-PH')} each</p>
+                      <div className="cart-item-details">
+                        <h3>{item.name}</h3>
+                        <p>{item.category}</p>
+                        <p>₱{item.price.toLocaleString('en-PH')} each</p>
+                      </div>
 
-                      <div className="cart-quantity">
-                        <button
-                          onClick={() =>
-                            setCart((currentCart) =>
-                              currentCart
-                                .map((cartItem) =>
-                                  cartItem.id === item.id
-                                    ? {
-                                        ...cartItem,
-                                        cartQuantity: cartItem.cartQuantity - 1,
-                                      }
-                                    : cartItem
-                                )
-                                .filter((cartItem) => cartItem.cartQuantity > 0)
-                            )
-                          }
-                        >
-                          −
-                        </button>
+                      <div className="cart-item-actions">
+                        <strong className="cart-item-price">
+                          ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
+                        </strong>
 
-                        <span>{item.cartQuantity}</span>
+                        <div className="cart-quantity">
+                          <button
+                            onClick={() =>
+                              setCart((currentCart) =>
+                                currentCart
+                                  .map((cartItem) =>
+                                    cartItem.id === item.id
+                                      ? {
+                                          ...cartItem,
+                                          cartQuantity: cartItem.cartQuantity - 1,
+                                        }
+                                      : cartItem
+                                  )
+                                  .filter(
+                                    (cartItem) => cartItem.cartQuantity > 0
+                                  )
+                              )
+                            }
+                          >
+                            −
+                          </button>
 
-                        <button
-                          disabled={item.cartQuantity >= item.quantity}
-                          onClick={() => addToCart(item)}
-                        >
-                          +
-                        </button>
+                          <span>{item.cartQuantity}</span>
+
+                          <button
+                            disabled={item.cartQuantity >= item.quantity}
+                            onClick={() => addToCart(item)}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
-
-                    <strong>
-                      ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
-                    </strong>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
                 <h2 className="cart-total">
                   Total: ₱{cartTotal.toLocaleString('en-PH')}
