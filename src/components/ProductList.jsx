@@ -1,6 +1,6 @@
-
 import products from '../data/products'
 import { useState } from 'react'
+import ProductDetails from '../pages/ProductDetails'
 
 function ProductList({ cart, addToCart, selectedCategory, setSelectedCategory }) {
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -24,96 +24,72 @@ function ProductList({ cart, addToCart, selectedCategory, setSelectedCategory })
 
   return (
     <>
-      <div className="category-filters">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`category-btn ${
-              selectedCategory === category ? 'active' : ''
-            }`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      <div className="product-grid">
-        {filteredProducts.map((product) => (
-          <div className="product-card" key={product.id}>
-            <img src={product.image} alt={product.name} />
-
-            <div className="product-info">
-              <span className="product-category">
-                {product.category}
-              </span>
-
-              <h3>{product.name}</h3>
-
-              <p className="product-price">
-                ₱{product.price.toLocaleString('en-PH')}
-              </p>
-
-              <p className="product-stock">
-                Stock: {product.quantity}
-              </p>
-
-              <p className="product-subtotal">
-                Subtotal: ₱
-                {(product.price * product.quantity).toLocaleString('en-PH')}
-              </p>
-
+      {selectedProduct ? (
+        <ProductDetails
+          product={selectedProduct}
+          addToCart={addToCart}
+          onBack={() => setSelectedProduct(null)}
+        />
+      ) : (
+        <>
+          <div className="category-filters">
+            {categories.map((category) => (
               <button
-                className="view-details-btn"
-                onClick={() => setSelectedProduct(product)}
+                key={category}
+                className={`category-btn ${
+                  selectedCategory === category ? 'active' : ''
+                }`}
+                onClick={() => setSelectedCategory(category)}
               >
-                View Details
+                {category}
               </button>
-
-              <button
-                className="add-to-cart-btn"
-                onClick={() => addToCart(product)}
-                disabled={product.quantity <= 0}
-              >
-                Add to Cart
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {selectedProduct && (
-        <div className="modal-overlay">
-          <div className="product-modal">
-            <button
-              className="close-modal-btn"
-              onClick={() => setSelectedProduct(null)}
-            >
-              ×
-            </button>
+          <div className="product-grid">
+            {filteredProducts.map((product) => (
+              <div className="product-card" key={product.id}>
+                <img src={product.image} alt={product.name} />
 
-            <img
-              src={selectedProduct.image}
-              alt={selectedProduct.name}
-            />
+                <div className="product-info">
+                  <span className="product-category">
+                    {product.category}
+                  </span>
 
-            <div className="modal-product-info">
-              <span className="product-category">
-                {selectedProduct.category}
-              </span>
+                  <h3>{product.name}</h3>
 
-              <h2>{selectedProduct.name}</h2>
+                  <p className="product-price">
+                    ₱{product.price.toLocaleString('en-PH')}
+                  </p>
 
-              <p>{selectedProduct.description}</p>
+                  <p className="product-stock">
+                    Stock: {product.quantity}
+                  </p>
 
-              <h3>
-                ₱{selectedProduct.price.toLocaleString('en-PH')}
-              </h3>
+                  <p className="product-subtotal">
+                    Subtotal: ₱
+                    {(product.price * product.quantity).toLocaleString('en-PH')}
+                  </p>
 
-              <p>Available Stock: {selectedProduct.quantity}</p>
-            </div>
+                  <button
+                    className="view-details-btn"
+                    onClick={() => setSelectedProduct(product)}
+                  >
+                    View Details
+                  </button>
+
+                  <button
+                    className="add-to-cart-btn"
+                    onClick={() => addToCart(product)}
+                    disabled={product.quantity <= 0}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
+        </>
       )}
     </>
   )
