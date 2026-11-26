@@ -494,3 +494,40 @@
   margin-top: 25px;
   color: #172554;
 }
+
+
+/* CART QUANTITY CONTROLS */
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.cart-quantity button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background-color: #172554;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cart-quantity button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.cart-quantity button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.cart-quantity span {
+  font-weight: 600;
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}

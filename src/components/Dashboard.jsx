@@ -126,26 +126,57 @@ function Dashboard() {
             ) : (
               <>
                 
-        {cart.map((item) => (
-        <div className="cart-item" key={item.id}>
-            <img
-            src={item.image}
-            alt={item.name}
-            className="cart-item-image"
-            />
+        
+                {cart.map((item) => (
+                <div className="cart-item" key={item.id}>
+                    <img
+                    src={item.image}
+                    alt={item.name}
+                    className="cart-item-image"
+                    />
 
-            <div className="cart-item-details">
-            <h3>{item.name}</h3>
-            <p>{item.category}</p>
-            <p>₱{item.price.toLocaleString('en-PH')} each</p>
-            <p>Quantity: {item.cartQuantity}</p>
-            </div>
+                    <div className="cart-item-details">
+                    <h3>{item.name}</h3>
+                    <p>{item.category}</p>
+                    <p>₱{item.price.toLocaleString('en-PH')} each</p>
 
-            <strong>
-            ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
-            </strong>
-        </div>
-        ))}
+                    <div className="cart-quantity">
+                        <button
+                        onClick={() =>
+                            setCart((currentCart) =>
+                            currentCart
+                                .map((cartItem) =>
+                                cartItem.id === item.id
+                                    ? {
+                                        ...cartItem,
+                                        cartQuantity: cartItem.cartQuantity - 1,
+                                    }
+                                    : cartItem
+                                )
+                                .filter((cartItem) => cartItem.cartQuantity > 0)
+                            )
+                        }
+                        >
+                        −
+                        </button>
+
+                        <span>{item.cartQuantity}</span>
+
+                        <button
+                        disabled={item.cartQuantity >= item.quantity}
+                        onClick={() => addToCart(item)}
+                        >
+                        +
+                        </button>
+                    </div>
+                    </div>
+
+                    <strong>
+                    ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
+                    </strong>
+                </div>
+                ))}
+
 
 
                 <h2 className="cart-total">
