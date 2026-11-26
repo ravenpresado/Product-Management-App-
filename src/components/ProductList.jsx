@@ -68,8 +68,14 @@ function ProductList({
                     ₱{product.price.toLocaleString('en-PH')}
                   </p>
 
-                  <p className="product-stock">
+                  <p className={`product-stock ${
+                    product.quantity < 5 ? 'low-stock' : ''
+                  }`}>
                     Stock: {product.quantity}
+
+                    {product.quantity < 5 && (
+                      <span className="low-stock-label">Low Stock</span>
+                    )}
                   </p>
 
                   <p className="product-subtotal">
