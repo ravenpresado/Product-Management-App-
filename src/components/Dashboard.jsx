@@ -125,19 +125,28 @@ function Dashboard() {
               <p>Your cart is empty.</p>
             ) : (
               <>
-                {cart.map((item) => (
-                  <div className="cart-item" key={item.id}>
-                    <div>
-                      <h3>{item.name}</h3>
-                      <p>₱{item.price.toLocaleString('en-PH')} each</p>
-                      <p>Quantity: {item.cartQuantity}</p>
-                    </div>
+                
+        {cart.map((item) => (
+        <div className="cart-item" key={item.id}>
+            <img
+            src={item.image}
+            alt={item.name}
+            className="cart-item-image"
+            />
 
-                    <strong>
-                      ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
-                    </strong>
-                  </div>
-                ))}
+            <div className="cart-item-details">
+            <h3>{item.name}</h3>
+            <p>{item.category}</p>
+            <p>₱{item.price.toLocaleString('en-PH')} each</p>
+            <p>Quantity: {item.cartQuantity}</p>
+            </div>
+
+            <strong>
+            ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
+            </strong>
+        </div>
+        ))}
+
 
                 <h2 className="cart-total">
                   Total: ₱{cartTotal.toLocaleString('en-PH')}
