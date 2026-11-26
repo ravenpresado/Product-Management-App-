@@ -5,6 +5,7 @@ import { useState } from 'react'
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [cart, setCart] = useState([])
 
   const categories = [
     'All',
@@ -69,6 +70,15 @@ function ProductList() {
                 >
                 View Details
                 </button>
+                <button
+                    className="add-to-cart-btn"
+                    onClick={() => {
+                        setCart([...cart, product])
+                        alert(`${product.name} added to cart!`)
+                    }}
+                    >
+                    Add to Cart
+                    </button>
             </div>
           </div>
         ))}
