@@ -4,6 +4,7 @@ import Products from '../pages/Products'
 
 function Dashboard() {
   const [activePage, setActivePage] = useState('dashboard')
+  const [selectedCategory, setSelectedCategory] = useState('All')
   const [cart, setCart] = useState([])
 
   const addToCart = (product) => {
@@ -118,14 +119,42 @@ function Dashboard() {
         )}
 
         {activePage === 'products' && (
-          <Products cart={cart} addToCart={addToCart} />
+          <Products
+            cart={cart}
+            addToCart={addToCart}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            />
         )}
 
         {activePage === 'categories' && (
           <section className="dashboard-content">
-            <h1>Categories</h1>
-            <p>Browse your products by category.</p>
-          </section>
+  <h1>Categories</h1>
+  <p>Browse your products by category.</p>
+
+  <div className="categories-grid">
+    {[
+      "Women's Clothing",
+      "Men's Clothing",
+      "Shoes",
+      "Sandals",
+      "Men's Accessories",
+      "Women's Accessories"
+    ].map((category) => (
+      <button
+        key={category}
+        className="category-card"
+        onClick={() => {
+          setSelectedCategory(category)
+          setActivePage('products')
+        }}
+      >
+        <h3>{category}</h3>
+        <span>View Products →</span>
+      </button>
+    ))}
+  </div>
+</section>
         )}
 
         {activePage === 'cart' && (

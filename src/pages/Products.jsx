@@ -1,7 +1,7 @@
 
 import ProductList from '../components/ProductList'
 
-function Products({ cart, addToCart }) {
+function Products({ cart, addToCart, selectedCategory, setSelectedCategory }) {
   return (
     <div className="products-page">
       <div className="products-header">
@@ -14,7 +14,12 @@ function Products({ cart, addToCart }) {
         </span>
       </div>
 
-      <ProductList cart={cart} addToCart={addToCart} />
+      <ProductList
+        cart={cart}
+        addToCart={addToCart}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        />
     </div>
   )
 }

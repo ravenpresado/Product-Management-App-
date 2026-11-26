@@ -2,8 +2,7 @@
 import products from '../data/products'
 import { useState } from 'react'
 
-function ProductList({ cart, addToCart }) {
-  const [selectedCategory, setSelectedCategory] = useState('All')
+function ProductList({ cart, addToCart, selectedCategory, setSelectedCategory }) {
   const [selectedProduct, setSelectedProduct] = useState(null)
 
   const categories = [
