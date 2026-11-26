@@ -1,11 +1,20 @@
 
 import { useState } from 'react'
 import Products from '../pages/Products'
+import productsData from '../data/products'
+import AddProduct from '../pages/AddProduct'
 
 function Dashboard() {
   const [activePage, setActivePage] = useState('dashboard')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [cart, setCart] = useState([])
+  const [productList, setProductList] = useState(productsData)
+
+  const handleAddProduct = (newProduct) => {
+  setProductList((currentProducts) => [...currentProducts, newProduct])
+  setActivePage('products')
+  setSelectedCategory('All')
+}
 
   const addToCart = (product) => {
     setCart((currentCart) => {
@@ -47,10 +56,10 @@ function Dashboard() {
 
   <nav className="sidebar-nav">
     <button
-      className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}
-      onClick={() => setActivePage('dashboard')}
+      className={activePage === 'addProduct' ? 'active' : ''}
+      onClick={() => setActivePage('addProduct')}
     >
-      Dashboard
+      + Add Product
     </button>
 
     <button
@@ -74,6 +83,13 @@ function Dashboard() {
       className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
       onClick={() => setActivePage('cart')}
     >
+      {activePage === 'addProduct' && (
+  <AddProduct
+    onAddProduct={handleAddProduct}
+    onCancel={() => setActivePage('products')}
+  />
+)}
+
       Cart ({cartItemCount})
     </button>
   </nav>
@@ -123,11 +139,12 @@ function Dashboard() {
 
         {activePage === 'products' && (
           <Products
+            products={productList}
             cart={cart}
             addToCart={addToCart}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
-            />
+          />
         )}
 
         {activePage === 'categories' && (
