@@ -1,7 +1,6 @@
 
 import { useState } from 'react'
 import Products from '../pages/Products'
-import ProductList from './ProductList'
 
 function Dashboard() {
   const [activePage, setActivePage] = useState('dashboard')
@@ -60,7 +59,12 @@ function Dashboard() {
             Products
           </button>
 
-          <button className="nav-item">Categories</button>
+          <button
+            className={`nav-item ${activePage === 'categories' ? 'active' : ''}`}
+            onClick={() => setActivePage('categories')}
+          >
+            Categories
+          </button>
 
           <button
             className={`nav-item ${activePage === 'cart' ? 'active' : ''}`}
@@ -117,6 +121,13 @@ function Dashboard() {
           <Products cart={cart} addToCart={addToCart} />
         )}
 
+        {activePage === 'categories' && (
+          <section className="dashboard-content">
+            <h1>Categories</h1>
+            <p>Browse your products by category.</p>
+          </section>
+        )}
+
         {activePage === 'cart' && (
           <section className="cart-section">
             <h1>Shopping Cart</h1>
@@ -125,59 +136,55 @@ function Dashboard() {
               <p>Your cart is empty.</p>
             ) : (
               <>
-                
-        
                 {cart.map((item) => (
-                <div className="cart-item" key={item.id}>
+                  <div className="cart-item" key={item.id}>
                     <img
-                    src={item.image}
-                    alt={item.name}
-                    className="cart-item-image"
+                      src={item.image}
+                      alt={item.name}
+                      className="cart-item-image"
                     />
 
                     <div className="cart-item-details">
-                    <h3>{item.name}</h3>
-                    <p>{item.category}</p>
-                    <p>₱{item.price.toLocaleString('en-PH')} each</p>
+                      <h3>{item.name}</h3>
+                      <p>{item.category}</p>
+                      <p>₱{item.price.toLocaleString('en-PH')} each</p>
 
-                    <div className="cart-quantity">
+                      <div className="cart-quantity">
                         <button
-                        onClick={() =>
+                          onClick={() =>
                             setCart((currentCart) =>
-                            currentCart
+                              currentCart
                                 .map((cartItem) =>
-                                cartItem.id === item.id
+                                  cartItem.id === item.id
                                     ? {
                                         ...cartItem,
                                         cartQuantity: cartItem.cartQuantity - 1,
-                                    }
+                                      }
                                     : cartItem
                                 )
                                 .filter((cartItem) => cartItem.cartQuantity > 0)
                             )
-                        }
+                          }
                         >
-                        −
+                          −
                         </button>
 
                         <span>{item.cartQuantity}</span>
 
                         <button
-                        disabled={item.cartQuantity >= item.quantity}
-                        onClick={() => addToCart(item)}
+                          disabled={item.cartQuantity >= item.quantity}
+                          onClick={() => addToCart(item)}
                         >
-                        +
+                          +
                         </button>
-                    </div>
+                      </div>
                     </div>
 
                     <strong>
-                    ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
+                      ₱{(item.price * item.cartQuantity).toLocaleString('en-PH')}
                     </strong>
-                </div>
+                  </div>
                 ))}
-
-
 
                 <h2 className="cart-total">
                   Total: ₱{cartTotal.toLocaleString('en-PH')}
