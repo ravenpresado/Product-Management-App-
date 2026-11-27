@@ -64,7 +64,7 @@ function Dashboard() {
   return (
     <div className="dashboard-layout">
       <header className="top-header">
-        <h2 className="sidebar-logo">ProductHub</h2>
+        <h2 className="sidebar-logo">Lilia Boutique</h2>
 
         <nav className="sidebar-nav">
           <button
