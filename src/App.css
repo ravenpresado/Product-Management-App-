@@ -880,6 +880,7 @@
 .form-actions {
   grid-column: 1 / -1;
   display: flex;
+  align-items: center;
   gap: 12px;
   margin-top: 8px;
 }
@@ -1544,4 +1545,19 @@
 .category-btn {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+}
+
+.form-actions .back-to-products-btn {
+  margin-bottom: 0;
+}
+
+.form-actions .add-to-cart-btn,
+.form-actions .back-to-products-btn {
+  height: 42px;
+  margin: 0;
+  padding: 0 18px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
