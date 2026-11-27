@@ -168,7 +168,7 @@ function Dashboard() {
 
         {activePage === 'categories' && (
           <section className="dashboard-content">
-            <h1>Categories</h1>
+            <h1 className="page-title">Categories</h1>
             <p>Browse your products by category.</p>
 
             <div className="categories-grid">
@@ -188,8 +188,8 @@ function Dashboard() {
                     setActivePage('products')
                   }}
                 >
-                  <h3>{category}</h3>
-                  <span>View Products →</span>
+                  <h3 className="category-name">{category}</h3>
+                  <span className="view-products-text">View Products →</span>
                 </button>
               ))}
             </div>
@@ -198,10 +198,10 @@ function Dashboard() {
 
         {activePage === 'cart' && (
           <section className="cart-section">
-            <h1>Shopping Cart</h1>
+            <h1 className="page-title">Shopping Cart</h1>
 
             {cart.length === 0 ? (
-              <p className="empty-cart">Your cart is empty.</p>
+              <p className="empty-cart-message">Your cart is empty.</p>
             ) : (
               <>
                 <div className="cart-items-list">

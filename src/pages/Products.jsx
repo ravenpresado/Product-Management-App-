@@ -13,7 +13,7 @@ function Products({
     <div className="products-page">
       <div className="products-header">
         <div>
-          <h1>Products</h1>
+          <h1 className="page-title">Products</h1>
           <p>Browse and manage your fashion collection.</p>
         </div>
 

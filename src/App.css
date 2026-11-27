@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 /* Main Dashboard Layout */
 .dashboard-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #f4f7fb;
-  font-family: Arial, sans-serif;
+  background: #FFF8FA;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Top Header */
@@ -49,7 +51,7 @@
 }
 
 .nav-item:hover {
-  background: #263b75;
+  background: #87596D;
   color: white;
 }
 
@@ -60,7 +62,7 @@
 }
 
 .nav-item:active {
-  background: #1d4ed8;
+  background: #9E4F70;
 }
 
 /* Main Content */
@@ -73,7 +75,7 @@
 }
 
 .nav-item:active {
-  background: #1d4ed8;
+  background: #9E4F70;
 }
 
 
@@ -97,6 +99,7 @@
   font-size: 28px;
   color: #75485D;
   margin: 0 0 8px;
+  font-family: 'Playfair Display', serif;
 }
 
 .dashboard-header p {
@@ -336,7 +339,7 @@
 }
 
 .category-btn:hover {
-  background: #eff6ff;
+  background: #F8DDE5;
   border-color: #C76B8A;
   color: #C76B8A;
 }
@@ -1465,4 +1468,80 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.product-name {
+  font-family: 'Playfair Display', serif;
+  color: #75485D;
+  font-weight: 600;
+}
+
+.sidebar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  color: #75485D;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.add-product-form label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #75485D;
+}
+
+.add-product-page p {
+  font-family: 'Montserrat', sans-serif;
+  color: #87596D;
+  font-size: 14px;
+}
+
+.add-product-form input,
+.add-product-form select,
+.add-product-form textarea {
+  font-family: 'Montserrat', sans-serif;
+  color: #75485D;
+}
+
+.products-header p {
+  font-family: 'Montserrat', sans-serif;
+  color: #87596D;
+  font-size: 14px;
+}
+
+.category-name {
+  font-family: 'Playfair Display', serif;
+  color: #75485D;
+  font-weight: 600;
+}
+
+.view-products-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #C76B8A;
+}
+
+.empty-cart-message {
+  font-family: 'Montserrat', sans-serif;
+  color: #87596D;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.cart-total {
+  font-family: 'Playfair Display', serif;
+  color: #75485D;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.category-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }

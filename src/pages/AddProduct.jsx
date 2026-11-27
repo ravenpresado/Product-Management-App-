@@ -66,7 +66,7 @@ const handleSubmit = (e) => {
   return (
     <div className="add-product-page">
       <div className="add-product-heading">
-        <h1>Add New Product</h1>
+        <h1 className="page-title">Add New Product</h1>
         <p>Enter the product information to add it to your inventory.</p>
       </div>
 
