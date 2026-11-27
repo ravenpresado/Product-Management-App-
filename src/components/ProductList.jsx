@@ -11,19 +11,31 @@ function ProductList({
 }) {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [notification, setNotification] = useState('')
+  const [isLeaving, setIsLeaving] = useState(false)
 
   useEffect(() => {
     if (!notification) return
 
-    const timer = setTimeout(() => {
-      setNotification('')
-    }, 2500)
+    setIsLeaving(false)
 
-    return () => clearTimeout(timer)
+    const exitTimer = setTimeout(() => {
+      setIsLeaving(true)
+    }, 5000)
+
+    const removeTimer = setTimeout(() => {
+      setNotification('')
+      setIsLeaving(false)
+    }, 5300)
+
+    return () => {
+      clearTimeout(exitTimer)
+      clearTimeout(removeTimer)
+    }
   }, [notification])
 
   const handleAddToCart = (product) => {
     addToCart(product)
+    setIsLeaving(false)
     setNotification(`${product.name} added to cart!`)
   }
 
@@ -46,15 +58,18 @@ function ProductList({
 
   return (
     <>
-      {notification && (
-        <div className="cart-notification">
-          <span className="notification-check">✓</span>
-          <div>
-            <strong>Added to Cart!</strong>
-            <p>{notification}</p>
-          </div>
-        </div>
-      )}
+      
+        <div
+  className={`cart-notification ${
+    notification && !isLeaving ? 'notification-visible' : ''
+  }`}
+>
+  <span className="notification-check">✓</span>
+  <div>
+    <strong>Added to Cart!</strong>
+    <p>{notification}</p>
+  </div>
+</div>
 
       {selectedProduct ? (
         <ProductDetails
@@ -94,9 +109,11 @@ function ProductList({
                     ₱{product.price.toLocaleString('en-PH')}
                   </p>
 
-                  <p className={`product-stock ${
-                    product.quantity < 5 ? 'low-stock' : ''
-                  }`}>
+                  <p
+                    className={`product-stock ${
+                      product.quantity < 5 ? 'low-stock' : ''
+                    }`}
+                  >
                     Stock: {product.quantity}
 
                     {product.quantity < 5 && (
